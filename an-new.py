@@ -43,11 +43,11 @@ REPORT_MD = '''
 
 ## Executive Summary:
 
-On {{ date.strftime("%m/%d/%Y") }} {{ user }} via {{ escalation }} of a security event. This incident was initially classified as a {{ priority }} severity event and required action due to the sensitive nature of the investigation.
+On {{ date.strftime("%m/%d/%Y") }}{% if user %}{{ user }} was notified via {{ escalation }} of a security event.{% else %} a security event occurred.{% endif %} This incident was initially classified as a {{ priority }} severity event and required action due to the sensitive nature of the investigation.
 
 ### Timeline
 
-* {{ date.strftime("%m/%d/%Y %H:%M" }}: Initial incident investigation created
+* {{ date.strftime("%m/%d/%Y %H:%M") }}: Initial incident investigation created
 
 
 # Observations
