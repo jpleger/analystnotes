@@ -32,8 +32,7 @@ urls:
 {%- endfor %}
 '''
 
-TIMELINE_YAML = '''
----
+TIMELINE_YAML = '''---
 timeline:
   - date: {{ date.strftime("%z") }}
     note: "Investigation Started"
@@ -62,6 +61,7 @@ On {{ date.strftime("%m/%d/%Y") }} {{ user }} via {{ escalation }} of a security
 def create_scaffolding(context):
     indicators = jinja2.Template(INDICATORS_YAML).render(**context)
     report = jinja2.Template(REPORT_MD).render(**context)
+    timeline = jinja2.Template(TIMELINE_YAML).render(**context)
     base_dir = os.path.abspath(os.path.expandvars(os.path.expanduser(ANALYSIS_DIR)))
     dir_name = jinja2.Template(DIR_FORMAT).render(**context)
     base_dir = os.path.join(base_dir, dir_name)
@@ -74,6 +74,8 @@ def create_scaffolding(context):
     # Write templates to dir
     with open(os.path.join(base_dir, 'indicators.yaml'), 'w') as fd:
         fd.write(indicators)
+    with open(os.path.join(base_dir, 'timeline.yaml'), 'w') as fd:
+        fd.write(timeline)
     with open(os.path.join(base_dir, 'report.md'), 'w') as fd:
         fd.write(report)
 
