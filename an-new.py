@@ -33,9 +33,8 @@ urls:
 '''
 
 TIMELINE_YAML = '''---
-timeline:
-  - date: {{ date.strftime("%z") }}
-    note: "Investigation Started"
+- date: {{ date.isoformat() }}
+  note: "Initial Creation"
 '''
 
 REPORT_MD = '''
@@ -78,6 +77,7 @@ def create_scaffolding(context):
         fd.write(timeline)
     with open(os.path.join(base_dir, 'report.md'), 'w') as fd:
         fd.write(report)
+    print('Created analysis dir: {}'.format(base_dir))
 
 
 def input_multiline():
